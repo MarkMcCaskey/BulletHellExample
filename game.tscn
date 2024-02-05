@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4amycj3tcau7"]
+
+[ext_resource type="PackedScene" uid="uid://dedumt0ej26av" path="res://Entities/player.tscn" id="1_wd2fc"]
+[ext_resource type="PackedScene" uid="uid://clncl55tgf0ny" path="res://Levels/level_1.tscn" id="2_qd52e"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Level1" parent="." instance=ExtResource("2_qd52e")]
+position = Vector2(298, 182)
+
+[node name="Player" parent="." instance=ExtResource("1_wd2fc")]
+position = Vector2(288, 181)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+position = Vector2(-288, -181)
+remote_path = NodePath("../../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(289, 183)
+position_smoothing_enabled = true

@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://clncl55tgf0ny"]
+
+[ext_resource type="Texture2D" uid="uid://cey114hwqptb2" path="res://assets/windowsbackground.jpg" id="1_s4bx0"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qwqft"]
+normal = Vector2(2, 2.08165e-12)
+distance = -150.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gnwqg"]
+normal = Vector2(2.08165e-12, 3)
+distance = -63.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3etbj"]
+normal = Vector2(2.08165e-12, -3)
+distance = -63.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_38nra"]
+normal = Vector2(-2, 2.08165e-12)
+distance = -150.0
+
+[node name="Level1" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_s4bx0")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("WorldBoundaryShape2D_qwqft")
+
+[node name="UpperWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperWall"]
+shape = SubResource("WorldBoundaryShape2D_gnwqg")
+
+[node name="LowerWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LowerWall"]
+shape = SubResource("WorldBoundaryShape2D_3etbj")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("WorldBoundaryShape2D_38nra")
