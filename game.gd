@@ -6,4 +6,8 @@ extends Node2D
 
 func _on_player_player_health_changed(_old: float, new: float) -> void:
 	ui.player_hp = new
+	if new <= 0:
+		ui.player_lose()
 
+func _on_boss_boss_died() -> void:
+	ui.player_win()

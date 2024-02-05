@@ -25,6 +25,7 @@ update_scale = false
 position = Vector2(299, 258)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [node name="Boss" parent="." instance=ExtResource("3_l038s")]
 position = Vector2(154, 70)
@@ -32,10 +33,6 @@ position = Vector2(154, 70)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource("3_7e6ja")]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-grow_horizontal = 0
-grow_vertical = 0
 
 [connection signal="player_health_changed" from="Player" to="." method="_on_player_player_health_changed"]
+[connection signal="boss_died" from="Boss" to="." method="_on_boss_boss_died"]

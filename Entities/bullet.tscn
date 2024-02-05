@@ -8,6 +8,22 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dnrwj"]
 
+[sub_resource type="Animation" id="Animation_eej6o"]
+resource_name = "Fade"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(20, 20), Vector2(1e-05, 1e-05)]
+}
+
 [sub_resource type="Animation" id="Animation_20uem"]
 resource_name = "Hit"
 length = 0.3
@@ -46,22 +62,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_eej6o"]
-resource_name = "Fade"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(20, 20), Vector2(1e-05, 1e-05)]
 }
 
 [sub_resource type="Animation" id="Animation_notdf"]
