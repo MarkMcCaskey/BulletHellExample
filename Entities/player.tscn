@@ -1,20 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://dedumt0ej26av"]
+[gd_scene load_steps=6 format=3 uid="uid://dedumt0ej26av"]
 
 [ext_resource type="Script" path="res://Entities/player.gd" id="1_vijir"]
-[ext_resource type="Texture2D" uid="uid://dteqs4dx5axcl" path="res://assets/shibaface.png" id="2_myygq"]
+[ext_resource type="Texture2D" uid="uid://cqhki5myqnm1q" path="res://assets/dogface.png" id="2_4oxs0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gm8o2"]
 radius = 18.0
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_v5qvj"]
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_dfn1o"]
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_vijir")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(2, 0)
-scale = Vector2(0.15452, 0.15452)
-texture = ExtResource("2_myygq")
+position = Vector2(3, 0)
+scale = Vector2(0.0660662, 0.0660662)
+texture = ExtResource("2_4oxs0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gm8o2")
@@ -24,3 +26,13 @@ tree_root = SubResource("AnimationNodeStateMachine_v5qvj")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_dfn1o")
+
+[node name="BulletSpawnLocation" type="Marker2D" parent="."]
+position = Vector2(-9, 4)

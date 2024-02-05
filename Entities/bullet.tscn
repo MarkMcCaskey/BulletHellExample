@@ -1,0 +1,182 @@
+[gd_scene load_steps=18 format=3 uid="uid://dmufg4ft1hda6"]
+
+[ext_resource type="Script" path="res://Entities/bullet.gd" id="1_douj3"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_3ujsw"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_5xfvh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dnrwj"]
+
+[sub_resource type="Animation" id="Animation_20uem"]
+resource_name = "Hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.133333, 0.109804, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_eej6o"]
+resource_name = "Fade"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(20, 20), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_notdf"]
+resource_name = "Spawn"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2.08165e-12, 2.08165e-12), Vector2(20, 20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k01js"]
+_data = {
+"Fade": SubResource("Animation_eej6o"),
+"Hit": SubResource("Animation_20uem"),
+"Spawn": SubResource("Animation_notdf")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m50pf"]
+animation = &"Fade"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_imkrg"]
+animation = &"Hit"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6iv7u"]
+animation = &"Spawn"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j04lg"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fdh18"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xelqr"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iwu32"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2j6n6"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_irfkf"]
+states/Fade/node = SubResource("AnimationNodeAnimation_m50pf")
+states/Fade/position = Vector2(651.5, 115.895)
+states/Hit/node = SubResource("AnimationNodeAnimation_imkrg")
+states/Hit/position = Vector2(685.1, 15.395)
+states/Spawn/node = SubResource("AnimationNodeAnimation_6iv7u")
+states/Spawn/position = Vector2(364, 99.75)
+transitions = ["Start", "Spawn", SubResource("AnimationNodeStateMachineTransition_j04lg"), "Hit", "End", SubResource("AnimationNodeStateMachineTransition_fdh18"), "Spawn", "Hit", SubResource("AnimationNodeStateMachineTransition_xelqr"), "Spawn", "Fade", SubResource("AnimationNodeStateMachineTransition_iwu32"), "Fade", "End", SubResource("AnimationNodeStateMachineTransition_2j6n6")]
+graph_offset = Vector2(296.7, -26.835)
+
+[node name="Bullet" type="Node2D"]
+script = ExtResource("1_douj3")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+scale = Vector2(20, 20)
+mesh = SubResource("SphereMesh_3ujsw")
+texture = SubResource("CanvasTexture_5xfvh")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_dnrwj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_k01js")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
+libraries = {
+"": SubResource("AnimationLibrary_k01js")
+}
+tree_root = SubResource("AnimationNodeStateMachine_irfkf")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

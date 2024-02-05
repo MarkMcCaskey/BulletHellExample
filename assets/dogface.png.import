@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dteqs4dx5axcl"
-path="res://.godot/imported/shibaface.png-94c9195ff9d72c86165d2f1c8d83e4f7.ctex"
+uid="uid://cqhki5myqnm1q"
+path="res://.godot/imported/dogface.png-f82f9bcf4afc4d2ebb2974d0c6157e7d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/shibaface.png"
-dest_files=["res://.godot/imported/shibaface.png-94c9195ff9d72c86165d2f1c8d83e4f7.ctex"]
+source_file="res://assets/dogface.png"
+dest_files=["res://.godot/imported/dogface.png-f82f9bcf4afc4d2ebb2974d0c6157e7d.ctex"]
 
 [params]
 

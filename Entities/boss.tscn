@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://btp6gcpdiq8em"]
+
+[ext_resource type="Script" path="res://Entities/boss.gd" id="1_8olc2"]
+[ext_resource type="Texture2D" uid="uid://50x6lpr0pbuw" path="res://assets/catface2.png" id="2_074b6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jrt8j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_47s4t"]
+
+[node name="Boss" type="Node2D"]
+script = ExtResource("1_8olc2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-9.53674e-07, -10)
+scale = Vector2(0.266106, 0.266106)
+texture = ExtResource("2_074b6")
+
+[node name="CollisionArea" type="Area2D" parent="."]
+scale = Vector2(5, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
+shape = SubResource("CircleShape2D_jrt8j")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+scale = Vector2(6, 6)
+shape = SubResource("CircleShape2D_47s4t")
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[node name="BulletSpawnLocation" type="Marker2D" parent="."]
+position = Vector2(1, 41)
+
+[connection signal="area_entered" from="CollisionArea" to="." method="_on_collision_area_area_entered"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

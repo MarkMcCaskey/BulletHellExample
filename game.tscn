@@ -1,20 +1,41 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4amycj3tcau7"]
+[gd_scene load_steps=6 format=3 uid="uid://c4amycj3tcau7"]
 
+[ext_resource type="Script" path="res://game.gd" id="1_uqfmr"]
 [ext_resource type="PackedScene" uid="uid://dedumt0ej26av" path="res://Entities/player.tscn" id="1_wd2fc"]
 [ext_resource type="PackedScene" uid="uid://clncl55tgf0ny" path="res://Levels/level_1.tscn" id="2_qd52e"]
+[ext_resource type="PackedScene" uid="uid://b125jgumg215u" path="res://Levels/ui.tscn" id="3_7e6ja"]
+[ext_resource type="PackedScene" uid="uid://btp6gcpdiq8em" path="res://Entities/boss.tscn" id="3_l038s"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_uqfmr")
 
 [node name="Level1" parent="." instance=ExtResource("2_qd52e")]
 position = Vector2(298, 182)
 
 [node name="Player" parent="." instance=ExtResource("1_wd2fc")]
-position = Vector2(288, 181)
+position = Vector2(297, 253)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
-position = Vector2(-288, -181)
+position = Vector2(2, 5)
 remote_path = NodePath("../../Camera2D")
+update_rotation = false
+update_scale = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(289, 183)
+position = Vector2(299, 258)
 position_smoothing_enabled = true
+drag_horizontal_enabled = true
+
+[node name="Boss" parent="." instance=ExtResource("3_l038s")]
+position = Vector2(154, 70)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("3_7e6ja")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[connection signal="player_health_changed" from="Player" to="." method="_on_player_player_health_changed"]
