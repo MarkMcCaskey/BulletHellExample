@@ -1,10 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4amycj3tcau7"]
+[gd_scene load_steps=12 format=3 uid="uid://c4amycj3tcau7"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_uqfmr"]
 [ext_resource type="PackedScene" uid="uid://dedumt0ej26av" path="res://Entities/player.tscn" id="1_wd2fc"]
 [ext_resource type="PackedScene" uid="uid://clncl55tgf0ny" path="res://Levels/level_1.tscn" id="2_qd52e"]
 [ext_resource type="PackedScene" uid="uid://b125jgumg215u" path="res://Levels/ui.tscn" id="3_7e6ja"]
 [ext_resource type="PackedScene" uid="uid://btp6gcpdiq8em" path="res://Entities/boss.tscn" id="3_l038s"]
+[ext_resource type="Shader" path="res://Materials/chromatic_aberation.gdshader" id="3_ngq03"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1fmyl"]
+shader = ExtResource("3_ngq03")
+shader_parameter/r_displacement = Vector2(2.08165e-12, 2.08165e-12)
+shader_parameter/g_displacement = Vector2(0, 0)
+shader_parameter/b_displacement = Vector2(2.08165e-12, 2.08165e-12)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_86g54"]
 normal = Vector2(2, 2.08165e-12)
@@ -33,6 +40,15 @@ position = Vector2(299, 258)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+scale = Vector2(50, 50)
+transform = Transform2D(50, 0, 0, 50, 0, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer"]
+material = SubResource("ShaderMaterial_1fmyl")
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

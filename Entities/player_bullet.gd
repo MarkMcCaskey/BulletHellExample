@@ -40,12 +40,14 @@ func process_boss_hit(boss: Boss) -> void:
 	particles.one_shot = true
 	particles.scale_amount_min = 7
 	particles.tangential_accel_min = 50
-	particles.orbit_velocity_min = -1
-	particles.orbit_velocity_max = 1
+	particles.orbit_velocity_min = -0.6
+	particles.orbit_velocity_max = 0.6
 	particles.spread = 90
 	particles.explosiveness = 0.5
 	particles.emitting = true
 	boss.add_child(particles)
+	particles.global_position += global_position
+	particles.global_position /= 2
 	hide()
 	hit_area.monitorable = false
 	hit_area.monitoring = false
