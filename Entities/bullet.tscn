@@ -7,6 +7,7 @@
 [sub_resource type="CanvasTexture" id="CanvasTexture_5xfvh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dnrwj"]
+radius = 7.0
 
 [sub_resource type="Animation" id="Animation_eej6o"]
 resource_name = "Fade"

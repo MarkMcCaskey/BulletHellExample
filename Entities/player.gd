@@ -10,6 +10,8 @@ class_name Player extends CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var bullet_spawn_location: Node2D = $BulletSpawnLocation
+@onready var hurtbox: Area2D = $Hurtbox
+@onready var hurtbox_shape: CollisionShape2D = $Hurtbox/CollisionShape2D
 
 var bullet: PackedScene = preload("res://Entities/player_bullet.tscn")
 
@@ -21,6 +23,7 @@ func _ready():
 	animation_tree.active = true
 
 func _physics_process(_delta: float) -> void:
+	if health <= 0: return
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	direction = Input.get_vector("left", "right", "up", "down")
@@ -38,6 +41,7 @@ func _physics_process(_delta: float) -> void:
 	update_facing_direction()
 
 func _input(event: InputEvent) -> void:
+	if health <= 0: return
 	if event.is_action_pressed("shoot"):
 		player_shoot()
 
@@ -61,3 +65,12 @@ func update_facing_direction():
 	
 	if is_new_direction:
 		bullet_spawn_location.position.x *= -1
+
+func die() -> void:
+	call_deferred("_die_inner")
+
+func _die_inner() -> void:
+	hide()
+	hurtbox.monitorable = false
+	hurtbox.monitoring = false
+	hurtbox_shape.disabled = true

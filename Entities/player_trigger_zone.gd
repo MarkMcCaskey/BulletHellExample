@@ -7,7 +7,7 @@ var already_triggered: bool = false
 func _on_area_2d_area_entered(_area: Area2D) -> void:
 	do_trigger()
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_area_2d_body_entered(_body: Node2D) -> void:
 	do_trigger()
 
 func do_trigger() -> void:
