@@ -40,7 +40,7 @@ func process_boss_hit(boss: Boss) -> void:
 	particles.one_shot = true
 	particles.scale_amount_min = 7
 	particles.tangential_accel_min = 50
-	particles.orbit_velocity_min = 0.1
+	particles.orbit_velocity_min = -1
 	particles.orbit_velocity_max = 1
 	particles.spread = 90
 	particles.explosiveness = 0.5
