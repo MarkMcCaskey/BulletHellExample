@@ -4,7 +4,7 @@ extends Node2D
 @onready var ui = $CanvasLayer/UI
 @onready var playable_area: Node2D = $PlayableArea
 
-@export var scroll_speed: float = 40.0
+@export var scroll_speed: float = 60.0
 
 func _physics_process(delta: float) -> void:
 	playable_area.global_translate(Vector2(0, scroll_speed * delta * -1))

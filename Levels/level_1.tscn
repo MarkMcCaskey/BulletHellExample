@@ -4338,11 +4338,27 @@ position = Vector2(-215, -87)
 script = ExtResource("6_87ynf")
 
 [node name="CircularBulletSpawner2" type="Node2D" parent="."]
-position = Vector2(2.08165e-12, -400)
+position = Vector2(-203, -904)
 script = ExtResource("6_87ynf")
 
 [node name="CircularBulletSpawner3" type="Node2D" parent="."]
-position = Vector2(-47, -800)
+position = Vector2(-60, -1223)
+script = ExtResource("6_87ynf")
+
+[node name="CircularBulletSpawner6" type="Node2D" parent="."]
+position = Vector2(-162, -1926)
+script = ExtResource("6_87ynf")
+
+[node name="CircularBulletSpawner7" type="Node2D" parent="."]
+position = Vector2(-133, -2275)
+script = ExtResource("6_87ynf")
+
+[node name="CircularBulletSpawner9" type="Node2D" parent="."]
+position = Vector2(-169, -1363)
+script = ExtResource("6_87ynf")
+
+[node name="CircularBulletSpawner8" type="Node2D" parent="."]
+position = Vector2(201, -2070)
 script = ExtResource("6_87ynf")
 
 [node name="PlayerTriggerZone2" parent="." node_paths=PackedStringArray("things_to_trigger") instance=ExtResource("7_cw4t3")]
@@ -4351,3 +4367,11 @@ things_to_trigger = [NodePath("../CircularBulletSpawner"), NodePath("../Circular
 [node name="PlayerTriggerZone3" parent="." node_paths=PackedStringArray("things_to_trigger") instance=ExtResource("7_cw4t3")]
 position = Vector2(-21, -306)
 things_to_trigger = [NodePath("../CircularBulletSpawner"), NodePath("../CircularBulletSpawner4"), NodePath("../CircularBulletSpawner5")]
+
+[node name="PlayerTriggerZone4" parent="." node_paths=PackedStringArray("things_to_trigger") instance=ExtResource("7_cw4t3")]
+position = Vector2(-5, -867)
+things_to_trigger = [NodePath("../CircularBulletSpawner2"), NodePath("../CircularBulletSpawner3")]
+
+[node name="PlayerTriggerZone5" parent="." node_paths=PackedStringArray("things_to_trigger") instance=ExtResource("7_cw4t3")]
+position = Vector2(1, -1666)
+things_to_trigger = [NodePath("../CircularBulletSpawner6"), NodePath("../CircularBulletSpawner7"), NodePath("../CircularBulletSpawner9"), NodePath("../CircularBulletSpawner8")]
