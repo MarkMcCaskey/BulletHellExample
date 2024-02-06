@@ -26,7 +26,7 @@ func _on_boss_boss_died() -> void:
 var camera_shake_intensity: float = 10.0
 
 func player_damage_taken() -> void:
-	var extent = ((100 - max(player.health, 0)) / 15)
+	var extent = ((100 - max(player.health, 0)) / 10)
 	chromatic_aberation_effect.material.set_shader_parameter("r_displacement", Vector2(extent, extent / 3))
 	chromatic_aberation_effect.material.set_shader_parameter("b_displacement", Vector2(extent * -1, extent / -3))
 	for i in range(6):
@@ -37,5 +37,5 @@ func player_damage_taken() -> void:
 		chromatic_aberation_effect.material.set_shader_parameter("r_displacement", Vector2(extent * y_val, (extent * x_val) / 3))
 		chromatic_aberation_effect.material.set_shader_parameter("b_displacement", Vector2(extent * y_val * -1, (extent * x_val) / -3))
 		await get_tree().create_timer(0.05).timeout
-	chromatic_aberation_effect.material.set_shader_parameter("r_displacement", Vector2(extent, extent / 3))
-	chromatic_aberation_effect.material.set_shader_parameter("b_displacement", Vector2(extent * -1, extent / -3))
+	chromatic_aberation_effect.material.set_shader_parameter("r_displacement", Vector2(extent / 3, extent / 6))
+	chromatic_aberation_effect.material.set_shader_parameter("b_displacement", Vector2(extent / -3, extent / -6))
