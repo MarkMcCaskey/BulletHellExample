@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4amycj3tcau7"]
+[gd_scene load_steps=10 format=3 uid="uid://c4amycj3tcau7"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_uqfmr"]
 [ext_resource type="PackedScene" uid="uid://dedumt0ej26av" path="res://Entities/player.tscn" id="1_wd2fc"]
@@ -6,20 +6,27 @@
 [ext_resource type="PackedScene" uid="uid://b125jgumg215u" path="res://Levels/ui.tscn" id="3_7e6ja"]
 [ext_resource type="PackedScene" uid="uid://btp6gcpdiq8em" path="res://Entities/boss.tscn" id="3_l038s"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_86g54"]
+normal = Vector2(2, 2.08165e-12)
+distance = -150.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ohlx4"]
+normal = Vector2(2.08165e-12, 3)
+distance = -63.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dbv31"]
+normal = Vector2(2.08165e-12, -3)
+distance = -63.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_a7rta"]
+normal = Vector2(-2, 2.08165e-12)
+distance = -150.0
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_uqfmr")
 
 [node name="Level1" parent="." instance=ExtResource("2_qd52e")]
 position = Vector2(298, 182)
-
-[node name="Player" parent="." instance=ExtResource("1_wd2fc")]
-position = Vector2(297, 253)
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
-position = Vector2(2, 5)
-remote_path = NodePath("../../Camera2D")
-update_rotation = false
-update_scale = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(299, 258)
@@ -27,12 +34,47 @@ position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
-[node name="Boss" parent="." instance=ExtResource("3_l038s")]
-position = Vector2(154, 70)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource("3_7e6ja")]
 
-[connection signal="player_health_changed" from="Player" to="." method="_on_player_player_health_changed"]
-[connection signal="boss_died" from="Boss" to="." method="_on_boss_boss_died"]
+[node name="PlayableArea" type="Node2D" parent="."]
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PlayableArea"]
+position = Vector2(299, 258)
+remote_path = NodePath("../../Camera2D")
+update_rotation = false
+update_scale = false
+
+[node name="Player" parent="PlayableArea" instance=ExtResource("1_wd2fc")]
+position = Vector2(297, 253)
+
+[node name="Boss" parent="PlayableArea" instance=ExtResource("3_l038s")]
+position = Vector2(154, 70)
+
+[node name="LeftWall" type="StaticBody2D" parent="PlayableArea"]
+position = Vector2(300, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayableArea/LeftWall"]
+shape = SubResource("WorldBoundaryShape2D_86g54")
+
+[node name="UpperWall" type="StaticBody2D" parent="PlayableArea"]
+position = Vector2(300, 2.08165e-12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayableArea/UpperWall"]
+shape = SubResource("WorldBoundaryShape2D_ohlx4")
+
+[node name="LowerWall" type="StaticBody2D" parent="PlayableArea"]
+position = Vector2(300, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayableArea/LowerWall"]
+shape = SubResource("WorldBoundaryShape2D_dbv31")
+
+[node name="RightWall" type="StaticBody2D" parent="PlayableArea"]
+position = Vector2(300, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayableArea/RightWall"]
+shape = SubResource("WorldBoundaryShape2D_a7rta")
+
+[connection signal="player_health_changed" from="PlayableArea/Player" to="." method="_on_player_player_health_changed"]
+[connection signal="boss_died" from="PlayableArea/Boss" to="." method="_on_boss_boss_died"]

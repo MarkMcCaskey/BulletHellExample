@@ -11,6 +11,7 @@ radius = 18.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_dfn1o"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 9
 script = ExtResource("1_vijir")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -29,10 +30,10 @@ anim_player = NodePath("../AnimationPlayer")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 4
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_dfn1o")
 
-[node name="BulletSpawnLocation" type="Marker2D" parent="."]
+[node name="BulletSpawnLocation" type="Node2D" parent="."]
 position = Vector2(-9, 4)

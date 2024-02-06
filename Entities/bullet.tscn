@@ -141,20 +141,20 @@ states/Hit/position = Vector2(685.1, 15.395)
 states/Spawn/node = SubResource("AnimationNodeAnimation_6iv7u")
 states/Spawn/position = Vector2(364, 99.75)
 transitions = ["Start", "Spawn", SubResource("AnimationNodeStateMachineTransition_j04lg"), "Hit", "End", SubResource("AnimationNodeStateMachineTransition_fdh18"), "Spawn", "Hit", SubResource("AnimationNodeStateMachineTransition_xelqr"), "Spawn", "Fade", SubResource("AnimationNodeStateMachineTransition_iwu32"), "Fade", "End", SubResource("AnimationNodeStateMachineTransition_2j6n6")]
-graph_offset = Vector2(296.7, -26.835)
+graph_offset = Vector2(103.2, -48.18)
 
 [node name="Bullet" type="Node2D"]
 script = ExtResource("1_douj3")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-scale = Vector2(20, 20)
+self_modulate = Color(1, 0.133333, 0.109804, 1)
+scale = Vector2(1e-05, 1e-05)
 mesh = SubResource("SphereMesh_3ujsw")
 texture = SubResource("CanvasTexture_5xfvh")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 4
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_dnrwj")
@@ -178,5 +178,6 @@ one_shot = true
 autostart = true
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

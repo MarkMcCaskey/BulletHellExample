@@ -54,6 +54,7 @@ shoot={
 2d_physics/layer_1="General Collision"
 2d_physics/layer_2="Damage from Player"
 2d_physics/layer_3="Damage to Player"
+2d_physics/layer_4="Player Trigger"
 
 [rendering]
 

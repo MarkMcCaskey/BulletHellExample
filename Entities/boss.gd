@@ -37,11 +37,15 @@ func _ready() -> void:
 	assert(target != null, "Can't find player")
 
 func shoot_at_player() -> void:
-	var scene = bullet.instantiate()
-	scene.global_position = bullet_spawn_location.global_position
+	for i in range(5):
+		var scene = bullet.instantiate()
+		scene.global_position = bullet_spawn_location.global_position
+		scene.speed.x = randf_range(-60.0, 60.0)
+		scene.speed.y += randf_range(-20.0, 20.0)
 	#global_position - target.global_position
 	#var angle_to_player = get_angle_to(target.global_position)
-	get_parent().add_child(scene)
+		# HACK:
+		get_parent().get_parent().add_child(scene)
 
 
 func _on_shoot_timer_timeout() -> void:

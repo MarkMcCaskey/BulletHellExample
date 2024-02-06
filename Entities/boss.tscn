@@ -74,14 +74,13 @@ shape = SubResource("CircleShape2D_jrt8j")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2
-collision_mask = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 scale = Vector2(6, 6)
 shape = SubResource("CircleShape2D_47s4t")
 
 [node name="ShootTimer" type="Timer" parent="."]
-wait_time = 1.5
 autostart = true
 
 [node name="BulletSpawnLocation" type="Marker2D" parent="."]

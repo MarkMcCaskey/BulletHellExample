@@ -14,10 +14,11 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_qakoe")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_apmx0")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

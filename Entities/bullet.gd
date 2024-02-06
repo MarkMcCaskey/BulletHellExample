@@ -21,8 +21,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if parent is Player:
 		# TODO: clean this up
 		parent.health -= damage
-		animation_tree["parameters/playback"].travel("Hit")
-		delete_after_animation = true
+	animation_tree["parameters/playback"].travel("Hit")
+	delete_after_animation = true
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if delete_after_animation || (anim_name == "Hit" || anim_name == "Fade"):
@@ -30,4 +30,9 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 
 func _on_timer_timeout() -> void:
 	animation_tree["parameters/playback"].travel("Fade")
+	delete_after_animation = true
+
+func _on_area_2d_body_entered(_body: Node2D) -> void:
+	#queue_free()
+	animation_tree["parameters/playback"].travel("Hit")
 	delete_after_animation = true

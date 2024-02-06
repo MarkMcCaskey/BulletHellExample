@@ -9,7 +9,7 @@ class_name Player extends CharacterBody2D
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var bullet_spawn_location: Marker2D = $BulletSpawnLocation
+@onready var bullet_spawn_location: Node2D = $BulletSpawnLocation
 
 var bullet: PackedScene = preload("res://Entities/player_bullet.tscn")
 
@@ -44,7 +44,8 @@ func _input(event: InputEvent) -> void:
 func player_shoot() -> void:
 	var scene = bullet.instantiate()
 	scene.global_position = bullet_spawn_location.global_position
-	get_parent().add_child(scene)
+	# HACK:
+	get_parent().get_parent().add_child(scene)
 
 #func update_animation():
 #	animation_tree.set("parameters/Move/blend_position", direction.x)

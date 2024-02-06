@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var damage: float = 10.0
-@export var speed: Vector2 = Vector2(5, -100.0)
+@export var speed: Vector2 = Vector2(5, -160.0)
 #@export var rotation: float = 0
 
 #@onready var delete_after_animation: bool = false
@@ -22,6 +22,10 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if parent is Boss:
 		# TODO: clean this up
 		parent.health -= damage
-		queue_free()
+	queue_free()
 		#animation_tree["parameters/playback"].travel("Hit")
 		#delete_after_animation = true
+
+
+func _on_area_2d_body_entered(_body: Node2D) -> void:
+	queue_free()
