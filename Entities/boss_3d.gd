@@ -1,0 +1,64 @@
+class_name Boss3D extends Node3D
+
+@export var health: float = 100.0:
+	get: return health
+	set(v):
+		if v <= 0:
+			emit_signal("boss_died")
+		else:
+			emit_signal("boss_hit")
+		health = v
+
+@export var move_speed: Vector2 = Vector2(38.0, 0)
+
+@onready var bullet_spawn_location: Marker3D = $BulletSpawnLocation
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+var target: Player3D
+var bullet: PackedScene = preload("res://Entities/bullet_3d.tscn")
+var moving_right: bool = true
+
+signal boss_died()
+signal boss_hit()
+
+func _physics_process(delta: float) -> void:
+	if health <= 0: return
+	moving_right = target.global_position.x > global_position.x
+	if moving_right:
+		global_position += Vector3(move_speed.x * delta, move_speed.y * delta, 0)
+	else:
+		global_position -= Vector3(move_speed.x * delta, move_speed.y * delta, 0)
+
+func _ready() -> void:
+	for p in get_tree().get_nodes_in_group("player"):
+		if p is Player3D:
+			target = p
+			break
+	assert(target != null, "Can't find player")
+
+func shoot_at_player() -> void:
+	for i in range(10):
+		var scene = bullet.instantiate()
+		# HACK:
+		get_parent().get_parent().add_child(scene)
+		scene.global_position = bullet_spawn_location.global_position
+		scene.speed.x = randf_range(-60.0, 60.0)
+		#scene.speed.y += randf_range(-1.0, 1.0)
+		scene.speed.z += randf_range(-20.0, 20.0)
+	#global_position - target.global_position
+	#var angle_to_player = get_angle_to(target.global_position)
+
+func _on_shoot_timer_timeout() -> void:
+	if health > 0:
+		shoot_at_player()
+
+func _on_boss_hit() -> void:
+	animation_player.play("Hit")
+	pass # Replace with function body.
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "Dead":
+		queue_free()
+
+func _on_boss_died() -> void:
+	animation_player.play("Dead")

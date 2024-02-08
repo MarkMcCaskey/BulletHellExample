@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://daooo5gtm4c7v"]
+
+[ext_resource type="Texture2D" uid="uid://cey114hwqptb2" path="res://assets/windowsbackground.jpg" id="1_dt4xg"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3ulp8"]
+size = Vector2(300, 4000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2isyv"]
+albedo_texture = ExtResource("1_dt4xg")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h5eby"]
+size = Vector3(300, 1, 4000)
+
+[node name="Level13D" type="Node3D"]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+mesh = SubResource("PlaneMesh_3ulp8")
+material = SubResource("StandardMaterial3D_2isyv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CSGMesh3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGMesh3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.5, 2.08165e-12)
+shape = SubResource("BoxShape3D_h5eby")

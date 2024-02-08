@@ -2,17 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm3ihdu1ftfbl"
-path.s3tc="res://.godot/imported/Bonjour.png-37d842ec8af99f81ced23ffa6dd07839.s3tc.ctex"
+uid="uid://dffy70sny4tru"
+path.s3tc="res://.godot/imported/model12_shotgun_wood_Normal.png-2bfe2c11672dfb77792630e826dafb68.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://assets/Bonjour.png"
-dest_files=["res://.godot/imported/Bonjour.png-37d842ec8af99f81ced23ffa6dd07839.s3tc.ctex"]
+source_file="res://assets/model12_shotgun_wood_Normal.png"
+dest_files=["res://.godot/imported/model12_shotgun_wood_Normal.png-2bfe2c11672dfb77792630e826dafb68.s3tc.ctex"]
 
 [params]
 
@@ -20,12 +21,12 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://assets/model12_shotgun_wood_Normal.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

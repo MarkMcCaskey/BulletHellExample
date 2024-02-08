@@ -2,17 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm3ihdu1ftfbl"
-path.s3tc="res://.godot/imported/Bonjour.png-37d842ec8af99f81ced23ffa6dd07839.s3tc.ctex"
+uid="uid://dcbi4xsmcoehl"
+path.s3tc="res://.godot/imported/model12_shotgun_wood.png-52a4360a4c89e17af08dcca9acb14d9e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://assets/Bonjour.png"
-dest_files=["res://.godot/imported/Bonjour.png-37d842ec8af99f81ced23ffa6dd07839.s3tc.ctex"]
+source_file="res://assets/model12_shotgun_wood.png"
+dest_files=["res://.godot/imported/model12_shotgun_wood.png-52a4360a4c89e17af08dcca9acb14d9e.s3tc.ctex"]
 
 [params]
 

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjppjhpd65jcr"]
+
+[ext_resource type="Script" path="res://Entities/player_bullet_3d.gd" id="1_yk3xj"]
+[ext_resource type="Texture2D" uid="uid://cm3ihdu1ftfbl" path="res://assets/Bonjour.png" id="2_m07j6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_b8bdv"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_lenhy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cnwsf"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+cull_mode = 1
+albedo_texture = ExtResource("2_m07j6")
+
+[node name="PlayerBullet3D" type="Node3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_yk3xj")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_b8bdv")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+mesh = SubResource("SphereMesh_lenhy")
+material = SubResource("StandardMaterial3D_cnwsf")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+autostart = true
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

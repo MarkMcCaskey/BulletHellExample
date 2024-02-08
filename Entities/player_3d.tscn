@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://ds8ndwscr4qxv"]
+
+[ext_resource type="Script" path="res://Entities/player_3d.gd" id="1_554uh"]
+[ext_resource type="Shader" path="res://Materials/chromatic_aberation.gdshader" id="2_3navh"]
+[ext_resource type="PackedScene" uid="uid://b125jgumg215u" path="res://Levels/ui.tscn" id="3_dfou5"]
+[ext_resource type="PackedScene" uid="uid://dmj4vj63pns1t" path="res://assets/scenes/model_12_shotgun.tscn" id="4_kgfm0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i0u1u"]
+shader = ExtResource("2_3navh")
+shader_parameter/r_displacement = Vector2(2.08165e-12, 2.08165e-12)
+shader_parameter/g_displacement = Vector2(0, 0)
+shader_parameter/b_displacement = Vector2(2.08165e-12, 2.08165e-12)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ymb0g"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uj3yi"]
+
+[node name="Player3D" type="CharacterBody3D"]
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 0, 0)
+collision_layer = 9
+script = ExtResource("1_554uh")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64952, 0)
+current = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
+scale = Vector2(50, 50)
+transform = Transform2D(50, 0, 0, 50, 0, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Camera/CanvasLayer"]
+material = SubResource("ShaderMaterial_i0u1u")
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="model12_shotgun" parent="Camera" instance=ExtResource("4_kgfm0")]
+transform = Transform3D(3.4952, -1.15519e-15, 0.183176, 1.22075e-15, 3.5, -1.22075e-15, -0.183176, 1.28297e-15, 3.4952, 2.45, -1.74664, -5.6)
+
+[node name="BulletSpawnLocation" type="Node3D" parent="Camera/model12_shotgun"]
+transform = Transform3D(1.99726, 6.97575e-16, -0.104672, -6.60109e-16, 2, 7.33128e-16, 0.104672, -6.97574e-16, 1.99726, -0.0221781, 0.0269536, 0.203143)
+
+[node name="BulletSpawnTarget" type="Node3D" parent="Camera/model12_shotgun"]
+transform = Transform3D(1.99726, 6.97576e-16, -0.104672, -6.60109e-16, 2, 7.33129e-16, 0.104672, -6.97575e-16, 1.99726, 0.00946909, 0.0269536, -2.34665)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_ymb0g")
+
+[node name="Hurtbox" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.115365, 0)
+shape = SubResource("SphereShape3D_uj3yi")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("3_dfou5")]
+
+[connection signal="player_health_changed" from="." to="." method="_on_player_health_changed"]
+[connection signal="PumpFinished" from="Camera/model12_shotgun" to="." method="_on_model_12_shotgun_pump_finished"]
+[connection signal="ShotFinished" from="Camera/model12_shotgun" to="." method="_on_model_12_shotgun_shot_finished"]

@@ -26,7 +26,7 @@ func _physics_process(_delta: float) -> void:
 	if health <= 0: return
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	direction = Input.get_vector("left", "right", "up", "down")
+	direction = Input.get_vector("move_left", "move_right", "move_forward", "move_backwards")
 	if direction.x != 0:
 		velocity.x = direction.x * speed
 	else:
@@ -42,7 +42,8 @@ func _physics_process(_delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if health <= 0: return
-	if event.is_action_pressed("shoot"):
+	# HACK:
+	if event.is_action_pressed("jump"):
 		player_shoot()
 
 func player_shoot() -> void:
